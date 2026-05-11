@@ -340,7 +340,10 @@ body::after{
 .middle-panel{
 
     padding:30px;
-   
+
+    display:flex;
+
+    flex-direction:column;
 }
 
 .upload-header{
@@ -397,7 +400,7 @@ body::after{
 
     text-align:center;
 
-    padding:50px 28px 70px;
+    padding:50px 28px 40px;
 }
 
 .upload-box i{
@@ -481,6 +484,50 @@ body::after{
     color:#8fb8ff !important;
 
     font-size:14px !important;
+}
+
+/* =========================================
+   RESULT BOX
+========================================= */
+
+#result{
+
+    margin-top:20px;
+
+    padding:0 4px;
+
+    color:#d6e6ff;
+
+    font-size:15px;
+
+    line-height:1.8;
+
+    text-align:center;
+
+    min-height:24px;
+}
+
+#result h2{
+
+    font-size:18px;
+
+    color:#1ea7ff;
+
+    margin-bottom:10px;
+}
+
+#result p{
+
+    font-size:15px;
+
+    color:#d6e6ff;
+
+    margin-bottom:6px;
+}
+
+#result strong{
+
+    color:white;
 }
 
 /* =========================================
@@ -891,27 +938,28 @@ body::after{
 
             <p>Drag & drop your MRI file here</p>
 
-<button type="button" class="upload-btn" id="uploadBtn">
+            <button type="button" class="upload-btn" id="uploadBtn">
 
-    <i class="fa-solid fa-upload"></i>
+                <i class="fa-solid fa-upload"></i>
 
-    Choose File
+                Choose File
 
-</button>
+            </button>
 
-<input
-type="file"
-id="fileInput"
-accept="image/*"
-style="display:none;">
+            <input
+            type="file"
+            id="fileInput"
+            accept="image/*"
+            style="display:none;">
 
             <p class="format-text">
-    Supported formats: JPG, PNG, DICOM
-</p>
-
-<div id="result"></div>
+                Supported formats: JPG, PNG, DICOM
+            </p>
 
         </div>
+
+        <!-- FIX: result box moved OUTSIDE upload-box -->
+        <div id="result"></div>
 
     </div>
 
@@ -999,7 +1047,7 @@ style="display:none;">
 
                 <h1>79%</h1>
 
-                <p> Estimated Sensitivity</p>
+                <p>Estimated Sensitivity</p>
 
             </div>
 
@@ -1122,7 +1170,7 @@ style="display:none;">
             <h3>MRI Classification</h3>
 
             <p>
-                 Experimental CNN-based
+                Experimental CNN-based
                 MRI scan analysis system
             </p>
 
@@ -1148,22 +1196,26 @@ style="display:none;">
     </div>
 
 </section>
+
+<!-- FIX: script.js loads FIRST so uploadMRI() is defined -->
+<script src="/static/script.js"></script>
+
+<!-- THEN event listeners attach -->
 <script>
 
-document.getElementById("uploadBtn").addEventListener("click", function () {
+    document.getElementById("uploadBtn").addEventListener("click", function () {
 
-    document.getElementById("fileInput").click();
+        document.getElementById("fileInput").click();
 
-});
+    });
 
-document.getElementById("fileInput").addEventListener("change", function () {
+    document.getElementById("fileInput").addEventListener("change", function () {
 
-    uploadMRI();
+        uploadMRI();
 
-});
+    });
 
 </script>
 
-<script src="/static/script.js"></script>
 </body>
 </html>
