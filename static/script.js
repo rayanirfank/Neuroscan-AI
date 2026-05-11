@@ -4,6 +4,8 @@ async function uploadMRI() {
 
     const resultBox = document.getElementById("result");
 
+    const previewImage = document.getElementById("previewImage");
+
     if (fileInput.files.length === 0) {
 
         resultBox.innerHTML = "Please select an MRI image.";
@@ -11,9 +13,19 @@ async function uploadMRI() {
         return;
     }
 
+    const selectedFile = fileInput.files[0];
+
+    // Show uploaded image instantly
+
+    const imageURL = URL.createObjectURL(selectedFile);
+
+    previewImage.src = imageURL;
+
+    // Prepare form data
+
     const formData = new FormData();
 
-    formData.append("file", fileInput.files[0]);
+    formData.append("file", selectedFile);
 
     resultBox.innerHTML = "Analyzing MRI image...";
 
@@ -38,9 +50,13 @@ async function uploadMRI() {
         console.log(data);
 
         resultBox.innerHTML = `
+
             <h2>Prediction Result</h2>
+
             <p><strong>Tumor Type:</strong> ${data.prediction}</p>
+
             <p><strong>Confidence:</strong> ${data.confidence}%</p>
+
         `;
 
     }
@@ -49,7 +65,10 @@ async function uploadMRI() {
 
         console.error(error);
 
-        resultBox.innerHTML = "Woops looks like I failed to analyze the image. Tell me did u post something way beyond my potential";
+        resultBox.innerHTML = `
+            Woops looks like I failed to analyze the image.
+            Tell me did u post something way beyond my potential
+        `;
 
     }
 
