@@ -37,7 +37,7 @@ classes = [
     "Pituitary"
 ]
 
-# Home route
+# Dashboard route
 
 @app.route('/')
 
@@ -45,7 +45,15 @@ def home():
 
     return send_from_directory('.', 'Dashboard.html')
 
-# Upload route
+# About page route
+
+@app.route('/About.html')
+
+def about():
+
+    return send_from_directory('.', 'About.html')
+
+# Upload prediction route
 
 @app.route('/upload', methods=['POST'])
 
