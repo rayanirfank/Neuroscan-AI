@@ -26,7 +26,7 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 # Load trained model
 
-model = load_model("brain_tumor_model.h5")
+model = load_model("brain_tumor_model.keras")
 
 # Class labels
 
@@ -118,4 +118,9 @@ def upload_image():
 
 if __name__ == '__main__':
 
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+
+    app.run(
+        host='0.0.0.0',
+        port=port
+    )

@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>About - NeuroScan AI</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:'Poppins',sans-serif;
+
+    background:#020817;
+
+    color:white;
+
+    overflow-x:hidden;
+}
+
+/* BACKGROUND */
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+    radial-gradient(circle at top left,
+    rgba(0,119,255,0.18),
+    transparent 30%),
+
+    radial-gradient(circle at bottom right,
+    rgba(0,119,255,0.10),
+    transparent 25%),
+
+    linear-gradient(to bottom,
+    #010817,
+    #020b1d);
+
+    z-index:-2;
+}
+
+/* NAVBAR */
+
+.navbar{
+
+    width:100%;
+
+    height:85px;
+
+    display:grid;
+
+    grid-template-columns:1fr auto 1fr;
+
+    align-items:center;
+
+    padding:0 40px;
+
+    border-bottom:1px solid rgba(0,140,255,0.12);
+}
+
+.logo-section{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+}
+
+.logo-icon{
+
+    font-size:34px;
+
+    color:#1ea7ff;
+}
+
+.logo-text h1{
+
+    font-size:22px;
+}
+
+.logo-text p{
+
+    font-size:11px;
+
+    color:#9fcfff;
+}
+
+.nav-links{
+
+    display:flex;
+
+    gap:45px;
+}
+
+.nav-links a{
+
+    text-decoration:none;
+
+    color:white;
+
+    font-weight:500;
+
+    position:relative;
+}
+
+.active-link{
+
+    color:#1ea7ff !important;
+}
+
+.active-link::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    bottom:-10px;
+
+    width:100%;
+    height:3px;
+
+    background:#1ea7ff;
+
+    border-radius:20px;
+}
+
+/* MAIN */
+
+.about-container{
+
+    max-width:1300px;
+
+    margin:auto;
+
+    padding:60px 20px;
+}
+
+.hero{
+
+    text-align:center;
+
+    margin-bottom:70px;
+}
+
+.hero h1{
+
+    font-size:64px;
+
+    margin-bottom:20px;
+}
+
+.hero span{
+
+    color:#1ea7ff;
+}
+
+.hero p{
+
+    max-width:850px;
+
+    margin:auto;
+
+    font-size:18px;
+
+    line-height:1.9;
+
+    color:#c4d8ff;
+}
+
+/* GRID */
+
+.about-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:24px;
+
+    margin-bottom:40px;
+}
+
+.card{
+
+    background:rgba(5,20,48,0.75);
+
+    border:1px solid rgba(0,140,255,0.15);
+
+    border-radius:24px;
+
+    padding:32px;
+
+    transition:0.3s;
+}
+
+.card:hover{
+
+    transform:translateY(-6px);
+
+    border-color:#1ea7ff;
+}
+
+.card i{
+
+    font-size:42px;
+
+    color:#1ea7ff;
+
+    margin-bottom:24px;
+}
+
+.card h2{
+
+    font-size:24px;
+
+    margin-bottom:16px;
+}
+
+.card p{
+
+    color:#c7d9ff;
+
+    line-height:1.8;
+}
+
+/* TECHNOLOGY */
+
+.tech-section{
+
+    margin-top:60px;
+
+    background:rgba(5,20,48,0.75);
+
+    border:1px solid rgba(0,140,255,0.15);
+
+    border-radius:28px;
+
+    padding:40px;
+}
+
+.tech-section h2{
+
+    font-size:38px;
+
+    margin-bottom:20px;
+}
+
+.tech-section span{
+
+    color:#1ea7ff;
+}
+
+.tech-section p{
+
+    color:#c7d9ff;
+
+    line-height:2;
+
+    font-size:17px;
+}
+
+/* FOOTER */
+
+.footer{
+
+    margin-top:60px;
+
+    text-align:center;
+
+    color:#8cb8ff;
+
+    font-size:14px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+
+    .about-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+
+        font-size:46px;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <div class="logo-section">
+
+        <i class="fa-solid fa-brain logo-icon"></i>
+
+        <div class="logo-text">
+
+            <h1>NeuroScan AI</h1>
+
+            <p>Brain Tumor Detection System</p>
+
+        </div>
+
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">Dashboard</a>
+
+    </div>
+
+</nav>
+
+<!-- ABOUT -->
+
+<section class="about-container">
+
+    <div class="hero">
+
+        <h1>
+            About <span>NeuroScan AI</span>
+        </h1>
+
+        <p>
+
+            NeuroScan AI is an AI-powered brain tumor
+            detection system developed as a machine learning
+            and medical imaging project. The platform is
+            designed to analyze MRI scans and assist in
+            identifying potential abnormalities using deep
+            learning techniques.
+
+        </p>
+
+    </div>
+
+    <div class="about-grid">
+
+        <div class="card">
+
+            <i class="fa-solid fa-brain"></i>
+
+            <h2>AI Detection</h2>
+
+            <p>
+
+                Uses deep learning models trained on MRI
+                brain scan datasets to classify and detect
+                tumor patterns with high accuracy.
+
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <i class="fa-solid fa-microchip"></i>
+
+            <h2>Machine Learning</h2>
+
+            <p>
+
+                Built using computer vision and transfer
+                learning concepts to improve prediction
+                performance and medical image analysis.
+
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            <i class="fa-solid fa-shield-heart"></i>
+
+            <h2>Medical Assistance</h2>
+
+            <p>
+
+                Designed as an educational AI healthcare
+                project demonstrating how AI can support
+                radiology and diagnostic workflows.
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="tech-section">
+
+        <h2>
+            Technology <span>Used</span>
+        </h2>
+
+        <p>
+
+            This project combines HTML, CSS, JavaScript,
+            and Artificial Intelligence concepts to create
+            an interactive medical imaging dashboard.
+            The interface focuses on modern UI design,
+            usability, and realistic healthcare aesthetics
+            while demonstrating AI-based MRI scan analysis.
+
+        </p>
+
+    </div>
+
+    <div class="footer">
+
+        NeuroScan AI • Student Machine Learning Project
+
+    </div>
+
+</section>
+
+</body>
+</html>
