@@ -26,7 +26,10 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 # Load trained model
 
-model = load_model("brain_tumor_model.keras")
+mmodel = load_model(
+    "brain_tumor_model.keras",
+    compile=False
+)
 
 # Class labels
 
@@ -108,11 +111,14 @@ def upload_image():
 
         # Model prediction
 
-        prediction = model.predict(img_array)
+        prediction = model.predict(
+    img_array,
+    verbose=0
+)
 
-        predicted_class = classes[
-            np.argmax(prediction)
-        ]
+predicted_class = classes[
+    np.argmax(prediction)
+]
 
         confidence = float(
             np.max(prediction) * 100
