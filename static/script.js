@@ -1,62 +1,51 @@
-console.log("script loaded");
+async function uploadMRI() {
 
-const uploadBtn = document.getElementById("uploadBtn");
+    const fileInput = document.getElementById("fileInput");
 
-const uploadInput = document.getElementById("fileInput");
+    const resultBox = document.getElementById("result");
 
-const resultBox = document.getElementById("result");
+    if (!fileInput.files.length) {
 
-const previewImage = document.getElementById("previewImage");
+        resultBox.innerHTML = "Please upload an MRI image.";
 
-uploadBtn.onclick = function () {
-
-    uploadInput.click();
-
-};
-
-uploadInput.onchange = async function () {
-
-    console.log("file selected");
-
-    const file = this.files[0];
-
-    if (!file) return;
-
-    // Display uploaded image instantly
-
-    const imageURL = URL.createObjectURL(file);
-
-    previewImage.src = imageURL;
-
-    // Prepare upload
+        return;
+    }
 
     const formData = new FormData();
 
-    formData.append("file", file);
+    formData.append("file", fileInput.files[0]);
 
-    resultBox.innerHTML = "Analyzing MRI Scan...";
+    resultBox.innerHTML = "Analyzing MRI image...";
 
     try {
 
-const response = await fetch(
-    "/upload",
-    {
-        method: "POST",
-        body: formData
-    }
-);
+        const response = await fetch("/upload", {
+
+            method: "POST",
+
+            body: formData
+
+        });
+
+        if (!response.ok) {
+
+            throw new Error("Server error");
+
+        }
 
         const data = await response.json();
 
+        console.log(data);
+
         resultBox.innerHTML = `
 
-            <h2>Prediction: ${data.prediction}</h2>
+            <h2>Prediction Result</h2>
 
-            <p>Confidence: ${data.confidence}%</p>
+            <p><strong>Tumor Type:</strong> ${data.prediction}</p>
+
+            <p><strong>Confidence:</strong> ${data.confidence}%</p>
 
         `;
-
-        console.log(data);
 
     }
 
@@ -68,4 +57,4 @@ const response = await fetch(
 
     }
 
-};
+}
