@@ -18,11 +18,17 @@ app = Flask(__name__)
 
 CORS(app)
 
+# Upload folder
+
 UPLOAD_FOLDER = "uploads"
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
+# Load trained model
+
 model = load_model("brain_tumor_model.keras")
+
+# Class labels
 
 classes = [
     "Glioma",
@@ -31,11 +37,15 @@ classes = [
     "Pituitary"
 ]
 
+# Home route
+
 @app.route('/')
 
 def home():
 
     return render_template("Dashboard.html")
+
+# About route
 
 @app.route('/about')
 
@@ -43,56 +53,90 @@ def about():
 
     return render_template("About.html")
 
+# Upload + Prediction route
+
 @app.route('/upload', methods=['POST'])
 
 def upload_image():
 
-    if 'file' not in request.files:
+    try:
+
+        if 'file' not in request.files:
+
+            return jsonify({
+                "error": "No file uploaded"
+            }), 400
+
+        file = request.files['file']
+
+        if file.filename == '':
+
+            return jsonify({
+                "error": "Empty filename"
+            }), 400
+
+        # Save uploaded file
+
+        file_path = os.path.join(
+            UPLOAD_FOLDER,
+            file.filename
+        )
+
+        file.save(file_path)
+
+        # Load image
+
+        img = image.load_img(
+            file_path,
+            target_size=(240, 240)
+        )
+
+        # Convert image to array
+
+        img_array = image.img_to_array(img)
+
+        # Expand dimensions
+
+        img_array = np.expand_dims(
+            img_array,
+            axis=0
+        )
+
+        # Preprocess image
+
+        img_array = preprocess_input(img_array)
+
+        # Model prediction
+
+        prediction = model.predict(img_array)
+
+        predicted_class = classes[
+            np.argmax(prediction)
+        ]
+
+        confidence = float(
+            np.max(prediction) * 100
+        )
 
         return jsonify({
-            "error": "No file uploaded"
+
+            "prediction": predicted_class,
+
+            "confidence": round(confidence, 2)
+
         })
 
-    file = request.files['file']
+    except Exception as e:
 
-    file_path = os.path.join(
-        UPLOAD_FOLDER,
-        file.filename
-    )
+        print("ERROR:", str(e))
 
-    file.save(file_path)
+        return jsonify({
 
-    img = image.load_img(
-        file_path,
-        target_size=(240, 240)
-    )
+            "error": str(e)
 
-    img_array = image.img_to_array(img)
+        }), 500
 
-    img_array = np.expand_dims(
-        img_array,
-        axis=0
-    )
-
-    img_array = preprocess_input(img_array)
-
-    prediction = model.predict(img_array)
-
-    predicted_class = classes[
-        np.argmax(prediction)
-    ]
-
-    confidence = float(
-        np.max(prediction) * 100
-    )
-
-    return jsonify({
-
-        "prediction": predicted_class,
-
-        "confidence": round(confidence, 2)
-
-    })
+# Run app
 
 if __name__ == '__main__':
 
