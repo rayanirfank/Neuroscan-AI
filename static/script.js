@@ -4,9 +4,9 @@ async function uploadMRI() {
 
     const resultBox = document.getElementById("result");
 
-    if (!fileInput.files.length) {
+    if (fileInput.files.length === 0) {
 
-        resultBox.innerHTML = "Please upload an MRI image.";
+        resultBox.innerHTML = "Please select an MRI image.";
 
         return;
     }
@@ -29,7 +29,7 @@ async function uploadMRI() {
 
         if (!response.ok) {
 
-            throw new Error("Server error");
+            throw new Error("Upload failed");
 
         }
 
@@ -38,13 +38,9 @@ async function uploadMRI() {
         console.log(data);
 
         resultBox.innerHTML = `
-
             <h2>Prediction Result</h2>
-
             <p><strong>Tumor Type:</strong> ${data.prediction}</p>
-
             <p><strong>Confidence:</strong> ${data.confidence}%</p>
-
         `;
 
     }
@@ -53,7 +49,7 @@ async function uploadMRI() {
 
         console.error(error);
 
-        resultBox.innerHTML = "Error analyzing MRI image.";
+        resultBox.innerHTML = "Woops looks like I failed to analyze the image. Tell me did u post something way beyond my potential";
 
     }
 
