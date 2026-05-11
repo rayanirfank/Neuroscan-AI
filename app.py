@@ -26,7 +26,7 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 # Load trained model
 
-model = load_model("brain_tumor_model.h5")
+model = load_model("brain_tumor_model.keras")
 
 # Class labels
 
