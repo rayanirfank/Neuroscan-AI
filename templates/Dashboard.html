@@ -1148,6 +1148,22 @@ style="display:none;">
     </div>
 
 </section>
+<script>
+
+document.getElementById("uploadBtn").addEventListener("click", function () {
+
+    document.getElementById("fileInput").click();
+
+});
+
+document.getElementById("fileInput").addEventListener("change", function () {
+
+    uploadMRI();
+
+});
+
+</script>
+
 <script src="/static/script.js"></script>
 </body>
 </html>
